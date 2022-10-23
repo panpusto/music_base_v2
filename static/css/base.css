@@ -1,0 +1,36 @@
+.main-content {
+  margin: 0;
+  font-family: "Raleway", sans-serif;
+  background-color: rgb(13, 21, 39);
+}
+
+.navbar-container .navbars-content {
+  background-color: rgb(24, 34, 54);
+  display: flex;
+  flex-direction: row;
+  list-style-type: none;
+  margin: 0px;
+}
+.navbar-container .navbars-content .navbar-item {
+  padding: 0.8rem 2rem;
+  color: rgb(242, 242, 245);
+}
+.navbar-container .navbars-content .navbar-item:hover {
+  background-color: rgb(33, 45, 69);
+}
+.navbar-container .navbars-content .navbar-item .navbar-link {
+  text-decoration: none;
+  color: rgb(243, 240, 235);
+}
+.navbar-container .navbars-content .navbar-item-log {
+  margin-left: auto;
+  padding: 0.8rem 2rem;
+  color: rgb(242, 242, 245);
+}
+.navbar-container .navbars-content .navbar-item-log:hover {
+  background-color: rgb(33, 45, 69);
+}
+.navbar-container .navbars-content .navbar-item-log .navbar-link {
+  text-decoration: none;
+  color: rgb(243, 240, 235);
+}
