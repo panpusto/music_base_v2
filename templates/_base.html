@@ -39,9 +39,14 @@
                     <a class="navbar-link" href="#">Reviews</a></li>
                 </li>
                 {% if user.is_authenticated %}
-                <li class="navbar-item-log">
-                    <a class="navbar-link" href="#">{{ user.username }}</a></li>
-                </li>
+                <div class="dropdown">
+                    <li class="navbar-item-log">
+                        <a class="navbar-link" href="#">{{ user.username }}</a></li>
+                    </li>
+                    <li class="navbar-item-log dropdown-content">
+                        <a class="navbar-link" href="{% url 'logout' %}">Log Out</a></li>
+                    </li>
+                </div>
                 {% else %}
                 <li class="navbar-item-log">
                     <a class="navbar-link" href="{% url 'login' %}">Log In</a></li>
