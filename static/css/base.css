@@ -2,6 +2,7 @@
   margin: 0;
   font-family: "Raleway", sans-serif;
   background-color: rgb(13, 21, 39);
+  color: rgb(242, 242, 245);
 }
 
 .navbar-container .navbars-content {
@@ -23,6 +24,8 @@
   color: rgb(243, 240, 235);
 }
 .navbar-container .navbars-content .navbar-item-log {
+  text-align: center;
+  width: 60px;
   margin-left: auto;
   padding: 0.8rem 2rem;
   color: rgb(242, 242, 245);
@@ -33,4 +36,22 @@
 .navbar-container .navbars-content .navbar-item-log .navbar-link {
   text-decoration: none;
   color: rgb(243, 240, 235);
+}
+
+.dropdown {
+  margin-left: auto;
+}
+
+.dropdown-content {
+  text-align: center;
+  width: 60px;
+  display: none;
+  position: absolute;
+  background-color: rgb(24, 34, 54);
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
 }
