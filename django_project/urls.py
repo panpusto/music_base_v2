@@ -17,6 +17,8 @@ from django.contrib import admin
 from django.urls import path, include
 
 urlpatterns = [
+    # debug
+    path('__debug__/', include('debug_toolbar.urls')),
     # admin
     path('admin/', admin.site.urls),
     # user management
@@ -24,5 +26,4 @@ urlpatterns = [
     # local apps
     path('accounts/', include('accounts.urls')),
     path('', include('pages.urls')),
-
 ]
