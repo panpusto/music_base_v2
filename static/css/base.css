@@ -8,3 +8,20 @@
 .container {
   margin-top: 10px;
 }
+
+.auth-btns {
+  display: flex;
+}
+
+.btn-github {
+  color: rgb(255,	255, 255);
+  background-color: rgb(50, 54, 61);
+  margin-top: 1rem;
+  margin-left: 0;
+  margin-right: 2rem;
+}
+
+.btn-github:hover {
+      color: rgb(255,	255, 255);
+      background-color: rgb(34, 37, 41);
+}
