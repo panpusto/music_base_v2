@@ -6,3 +6,4 @@ django-crispy-forms==1.14.0
 crispy-bootstrap5==0.7
 django-allauth==0.50.0
 django-debug-toolbar==3.7.0
+environs[django]==9.5.0
