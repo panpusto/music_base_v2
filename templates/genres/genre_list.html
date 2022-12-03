@@ -1,0 +1,13 @@
+{% extends '_base.html' %}
+
+{% block title %}Genres{% endblock title %}
+
+{% block content %}
+
+    <div class="list-group">
+        {% for genre in genre_list %}
+            <a href="#" class="list-group-item list-group-item-action">{{ genre.name }}</a>
+        {% endfor %}
+    </div>
+
+{%endblock content %}
