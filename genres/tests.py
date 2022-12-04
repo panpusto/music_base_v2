@@ -1,3 +1,42 @@
 from django.test import TestCase
+from django.contrib.auth import get_user_model
+from genres.models import Genre
+from django.urls import reverse
 
-# Create your tests here.
+class GenreTests(TestCase):
+
+    @classmethod
+    def setUpTestData(cls):
+        cls.user = get_user_model().objects.create_user(
+            username = 'testuser',
+            password = 'testpass123',
+            email = 'testuser@email.com',
+        )
+
+        cls.genre = Genre.objects.create(
+            name = 'test genre'
+        )
+
+    def test_genre_listing(self):
+        self.assertEqual(f'{self.genre.name}', 'test genre')
+
+    def test_add_genre_view_for_logged_in_user(self):
+        self.client.login(email='testuser@email.com', password='testpass123')
+        response = self.client.get(reverse('add_genre'))
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, 'Add new genre')
+        self.assertNotContains(response, 'Not contain me')
+        self.assertTemplateUsed(response, 'genres/create_form.html')
+
+    def test_add_genre_view_for_logged_out_user(self):
+        self.client.logout()
+        response = self.client.get(reverse('add_genre'))
+        self.assertEqual(response.status_code, 302)
+        self.assertRedirects(
+            response, '%s?next=/genres/add/' % (reverse('account_login'))
+        )
+        response = self.client.get(
+            '%s?next=/genres/add/' % (reverse('account_login'))
+        )
+        self.assertContains(response, 'Log In')
+        
