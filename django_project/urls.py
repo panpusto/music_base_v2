@@ -26,4 +26,5 @@ urlpatterns = [
     # local apps
     path('', include('pages.urls')),
     path('genres/', include('genres.urls')),
+    path('labels/', include('labels.urls')),
 ]
