@@ -1,10 +1,10 @@
 {% extends '_base.html' %}
 {% load crispy_forms_tags %}
 
-{% block title %}Add new genre{% endblock title %}
+{% block title %}Add new label{% endblock title %}
 
 {% block content %}
-    <h2>Add new genre</h2>
+    <h2>Add new label</h2>
     <form method="post">
         {% csrf_token %}
         {{ form|crispy}}
