@@ -261,6 +261,7 @@ cython_debug/
 
 # migrations
 accounts/migrations
-pages/migrations
+genres/migrations
+labels/migrations
 local_settings.py
 .sent_emails
