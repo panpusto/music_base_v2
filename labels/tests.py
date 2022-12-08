@@ -46,4 +46,10 @@ class LabelTests(TestCase):
         )   
         self.assertContains(response, 'Log In')
 
-        # TODO add test for detail view
+    def test_label_detail_view(self):
+        response = self.client.get(self.label.get_absolute_url())
+        no_response = self.client.get('labels/123456/')
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(no_response.status_code, 404)
+        self.assertContains(response, 'Warsaw')
+        self.assertTemplateUsed(response, 'labels/label_detail.html')
