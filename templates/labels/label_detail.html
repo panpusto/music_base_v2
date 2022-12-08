@@ -1,0 +1,21 @@
+{% extends '_base.html' %}
+
+{% block title %}Label details{% endblock title %}
+
+{% block content %}
+    <div class="title">
+        <h1>{{ label.name }}</h1>
+    </div>
+    <div class="details">
+        <h3>Address: {{ label.address }}</h3>
+        <h3>Country: {{ label.country }}</h3>
+        <h3>Status: {{ label.status }}</h3>
+        <h3>Styles: {{ label.styles }}</h3>
+        <h3>Founding year: {{ label.founding_year }}</h3>
+    </div>
+    <div class="adding-info">
+        <p>Added: {{ label.added }}</p>
+        <p>Added by: {{ label.added_by }}</p>
+        <p>Modified: {{ label.modified }}</p>
+    </div>
+{% endblock content %}

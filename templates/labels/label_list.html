@@ -6,7 +6,7 @@
 
     <div class="list-group">
         {% for label in label_list %}
-            <a href="#" class="list-group-item list-group-item-action">{{ label.name }}</a>
+            <a href="{{ label.get_absolute_url }}" class="list-group-item list-group-item-action">{{ label.name }}</a>
         {% endfor %}
     </div>
 
