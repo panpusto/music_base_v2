@@ -9,6 +9,7 @@ class GenreCreateView(LoginRequiredMixin, CreateView):
     form_class = GenreCreationForm
     success_url = reverse_lazy('home')
     template_name = 'genres/create_form.html'
+    login_url = 'account_login'
 
 
 class GenreListView(ListView):
