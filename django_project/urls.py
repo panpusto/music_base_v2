@@ -27,4 +27,5 @@ urlpatterns = [
     path('', include('pages.urls')),
     path('genres/', include('genres.urls')),
     path('labels/', include('labels.urls')),
+    path('musicians/', include('musicians.urls')),
 ]
