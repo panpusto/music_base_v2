@@ -263,5 +263,9 @@ cython_debug/
 accounts/migrations
 genres/migrations
 labels/migrations
+musicians/migrations
+bands/migrations
+albums/migrations
+reviews/migrations
 local_settings.py
 .sent_emails
