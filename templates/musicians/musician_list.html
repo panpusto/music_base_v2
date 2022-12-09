@@ -1,0 +1,16 @@
+{% extends '_base.html' %}
+
+{% block title %}Musicians{% endblock title %}
+
+{% block content %}
+
+    <div class="list-group">
+        {% for musician in musician_list %}
+            <a  href="{{ musician.get_absolute_url }}" 
+                class="list-group-item list-group-item-action">
+                {{ musician.name }}
+            </a>
+        {% endfor %}
+    </div>
+
+{% endblock content %}
