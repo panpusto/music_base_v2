@@ -6,8 +6,8 @@ from django.contrib.auth import get_user_model
 class Musician(models.Model):
     name = models.CharField(max_length=32)
     full_name = models.CharField(max_length=64)
-    born = models.DateField(blank=True)
-    died = models.DateField(blank=True)
+    born = models.DateField(blank=True, null=True)
+    died = models.DateField(blank=True, null=True)
     place_of_birth = models.CharField(max_length=32)
     bio = models.TextField(blank=True)
 
