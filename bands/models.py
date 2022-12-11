@@ -3,6 +3,7 @@ from genres.models import Genre
 from labels.models import Label
 from musicians.models import Musician
 from django.contrib.auth import get_user_model
+from django.urls import reverse
 
 
 BAND_STATUS = [
@@ -34,3 +35,6 @@ class Band(models.Model):
 
     def __str__(self):
         return f'{self.name}, {self.country_of_origin}'
+
+    def get_absolute_url(self):
+        return reverse("band_detail", args=[str(self.id)])
