@@ -28,4 +28,6 @@ urlpatterns = [
     path('genres/', include('genres.urls')),
     path('labels/', include('labels.urls')),
     path('musicians/', include('musicians.urls')),
+    path('bands/', include('bands.urls')),
+    path('musiciantoband/', include('musiciansbands.urls')),
 ]
