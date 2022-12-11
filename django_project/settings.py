@@ -57,6 +57,7 @@ INSTALLED_APPS = [
     'labels.apps.LabelsConfig',
     'musicians.apps.MusiciansConfig',
     'bands.apps.BandsConfig',
+    'musiciansbands.apps.MusiciansbandsConfig',
 ]
 
 MIDDLEWARE = [
