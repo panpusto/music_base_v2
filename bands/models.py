@@ -25,8 +25,8 @@ class Band(models.Model):
     genre = models.ManyToManyField(Genre)
     lyrical_themes = models.CharField(max_length=64)
     current_label = models.ForeignKey(Label, on_delete=models.CASCADE, related_name='current_label')
-    bio = models.TextField(null=True)
-    members = models.ManyToManyField(Musician, through='MusicianBand')
+    bio = models.TextField(null=True, blank=True)
+    members = models.ManyToManyField(Musician, through='musiciansbands.MusicianBand')
 
     added = models.DateTimeField(auto_now_add=True)
     added_by = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
@@ -34,8 +34,3 @@ class Band(models.Model):
 
     def __str__(self):
         return f'{self.name}, {self.country_of_origin}'
-
-
-# TODO:
-# - consider db architecture
-# - make migrations
