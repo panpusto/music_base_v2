@@ -267,5 +267,6 @@ musicians/migrations
 bands/migrations
 albums/migrations
 reviews/migrations
+musiciansbands/migrations
 local_settings.py
 .sent_emails
