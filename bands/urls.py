@@ -1,8 +1,9 @@
 from django.urls import path
-from bands.views import BandCreateView, BandListViewAlphabetically
+from bands.views import BandCreateView, BandListViewAlphabetically, BandDetailView
 
 
 urlpatterns = [
     path('', BandListViewAlphabetically.as_view(), name='band_list_alphabetically'),
+    path('<int:pk>/', BandDetailView.as_view(), name='band_detail'),
     path('add/', BandCreateView.as_view(), name='add_band'),
 ]
