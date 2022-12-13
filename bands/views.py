@@ -1,5 +1,5 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.views.generic import CreateView, ListView
+from django.views.generic import CreateView, ListView, DetailView
 from bands.forms import BandCreationForm
 from django.urls import reverse_lazy
 from bands.models import Band
@@ -21,3 +21,14 @@ class BandListViewAlphabetically(ListView):
     context_object_name = 'band_list'
     template_name = 'bands/band_list_alphabetically.html'
     ordering = 'name'
+
+
+class BandDetailView(DetailView):
+    model = Band
+    context_object_name = 'band'
+    template_name = 'bands/band_detail.html'
+
+    
+# TODO:
+# - add detail view
+# - consider list view with different ordering
