@@ -6,11 +6,8 @@
 
     <div class="list-group">
         {% for band in band_list %}
-            <a href="#" class="list-group-item list-group-item-action">{{ band.name }}</a>
+            <a href="{{ band.get_absolute_url }}" class="list-group-item list-group-item-action">{{ band.name }}</a>
         {% endfor %}
     </div>
 
 {%endblock content %}
-
-
-<!-- {{ band.get_absolute_url }} -->
