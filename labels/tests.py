@@ -20,7 +20,7 @@ class LabelTests(TestCase):
             country='Poland',
             status=1,
             founding_year=2020,
-            added_by_id=cls.user.id
+            added_by=cls.user
         )
 
     def test_label_listing(self):
