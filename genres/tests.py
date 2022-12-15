@@ -18,6 +18,8 @@ class GenreTests(TestCase):
         )
 
     def test_genre_listing(self):
+        response = self.client.get(reverse('genre_list'))
+        self.assertEqual(response.status_code, 200)
         self.assertEqual(f'{self.genre.name}', 'test genre')
 
     def test_add_genre_view_for_logged_in_user(self):
@@ -33,10 +35,10 @@ class GenreTests(TestCase):
         response = self.client.get(reverse('add_genre'))
         self.assertEqual(response.status_code, 302)
         self.assertRedirects(
-            response, '%s?next=/genres/add/' % (reverse('account_login'))
+            response, f'{reverse("account_login")}?next=/genres/add/'
         )
         response = self.client.get(
-            '%s?next=/genres/add/' % (reverse('account_login'))
+            f'{reverse("account_login")}?next=/genres/add/'
         )
         self.assertContains(response, 'Log In')
         
