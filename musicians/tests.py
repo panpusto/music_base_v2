@@ -56,8 +56,3 @@ class MusicianTests(TestCase):
         self.assertEqual(no_response.status_code, 404)
         self.assertContains(response, 'info about musician')
         self.assertTemplateUsed(response, 'musicians/musician_detail.html')
-
-
-# TODO:
-# - change redirects urls on f-string in tests for other apps
-# - add test for status_code in list views in other apps
