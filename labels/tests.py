@@ -24,6 +24,8 @@ class LabelTests(TestCase):
         )
 
     def test_label_listing(self):
+        response = self.client.get(reverse('label_list'))
+        self.assertEqual(response.status_code, 200)
         self.assertEqual(f'{self.label.name}', '2020') 
 
     def test_add_label_view_for_logged_in_user(self):
@@ -39,10 +41,10 @@ class LabelTests(TestCase):
         response = self.client.get(reverse('add_label'))
         self.assertEqual(response.status_code, 302)
         self.assertRedirects(
-            response, '%s?next=/labels/add/' % (reverse('account_login'))
+            response, f'{reverse("account_login")}?next=/labels/add/'
         )
         response = self.client.get(
-            '%s?next=/labels/add/' % (reverse('account_login'))
+            f'{reverse("account_login")}?next=/labels/add/'
         )   
         self.assertContains(response, 'Log In')
 
