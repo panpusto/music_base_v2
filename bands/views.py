@@ -30,5 +30,4 @@ class BandDetailView(DetailView):
 
     
 # TODO:
-# - add detail view
 # - consider list view with different ordering
