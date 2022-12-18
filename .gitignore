@@ -270,3 +270,4 @@ reviews/migrations
 musiciansbands/migrations
 local_settings.py
 .sent_emails
+todo.txt
