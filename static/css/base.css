@@ -25,3 +25,8 @@
       color: rgb(255,	255, 255);
       background-color: rgb(34, 37, 41);
 }
+
+img.album-cover {
+  height: 300px;
+  width: 300px;
+}
