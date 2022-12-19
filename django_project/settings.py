@@ -177,6 +177,10 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 DEFAULT_FROM_EMAIL = 'admin@alltimemusic.com'
 
+# media settings
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'
+
 try:
     from django_project.local_settings import EMAIL_HOST_USER, EMAIL_HOST_PASSWORD
 except ModuleNotFoundError:
