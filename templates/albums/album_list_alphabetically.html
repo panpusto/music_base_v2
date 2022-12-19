@@ -1,0 +1,18 @@
+{% extends '_base.html' %}
+
+{% block title %}Albums alphabetically{% endblock title %}
+
+{% block content %}
+
+    <div class="list-group">
+        {% for album in album_list %}
+            <a 
+                href="{{ album.get_absolute_url }}" 
+                class="list-group-item list-group-item-action"
+            >
+            {{ album.title }} by {{ album.band }}
+            </a>
+        {% endfor %}
+    </div>
+
+{%endblock content %}

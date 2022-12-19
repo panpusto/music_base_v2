@@ -1,0 +1,25 @@
+{% extends '_base.html' %}
+
+{% block title %}Album details{% endblock title %}
+
+{% block content %}
+    <div class="title">
+        <h1>{{ album.title }} by {{ album.band }}</h1>
+    </div>
+    <div class="details">
+        <img class="album-cover" src="{{ album.cover.url }}" alt="{{ album.title }}">
+    </div>
+    <div class="details">
+        <h3>Genre: {% for genre in album.genre.all %}{{ genre }}{% endfor %}</h3>
+        <h3>Type: {{ album.get_album_type_display }}</h3>
+        <h3>Release date: {{ album.release_date }}</h3>
+        <h3>Catalog ID: {{ album.catalog_id }}</h3>
+        <h3>Label: {{ album.label }}</h3>
+        <h3>Format: {{ album.get_album_format_display }}</h3>
+    </div>
+    <div class="adding-info">
+        <p>Added: {{ album.added }}</p>
+        <p>Added by: {{ album.added_by }}</p>
+        <p>Modified: {{ album.modified }}</p>
+    </div>
+{% endblock content %}
