@@ -51,4 +51,5 @@ class Album(models.Model):
         return f'{self.title} by {self.band}'
 
     def get_absolute_url(self):
-        return reverse("album_details", args=[str(self.id)])
+        return reverse("album_detail", args=[str(self.id)])
+        
