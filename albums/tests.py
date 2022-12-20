@@ -46,6 +46,7 @@ class AlbumTests(TestCase):
             catalog_id='NO001',
             label=cls.label,
             album_format=1,
+            cover='media/album_covers/age_of_excuse.jpg',
             added_by=cls.user
         )
 
@@ -62,4 +63,22 @@ class AlbumTests(TestCase):
         self.assertNotContains(response, 'Not contain me')
         self.assertTemplateUsed(response, 'albums/create_form.html')
 
+    def test_add_album_view_for_logged_out_user(self):
+        self.client.logout()
+        response = self.client.get(reverse('add_album'))
+        self.assertEqual(response.status_code, 302)
+        self.assertRedirects(
+            response, f'{reverse("account_login")}?next=/albums/add/'
+        )
+        response = self.client.get(
+            f'{reverse("account_login")}?next=/albums/add/'
+        )
+        self.assertContains(response, 'Log In')
     
+    def test_album_detail_view(self):
+        response = self.client.get(self.album.get_absolute_url())
+        no_response = self.client.get('albums/123456/')
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(no_response.status_code, 404)
+        self.assertContains(response, 'NO001')
+        self.assertTemplateUsed(response, 'albums/album_detail.html')
