@@ -54,4 +54,12 @@ class AlbumTests(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertEqual(f'{self.album.title}', 'Title')
     
+    def test_add_album_view_for_logged_in_user(self):
+        self.client.login(email='testuser1@email.com', password='testpass123')
+        response = self.client.get(reverse('add_album'))
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, 'Add new album')
+        self.assertNotContains(response, 'Not contain me')
+        self.assertTemplateUsed(response, 'albums/create_form.html')
+
     
