@@ -30,3 +30,11 @@ img.album-cover {
   height: 300px;
   width: 300px;
 }
+
+.page-link {
+  color:rgb(34, 37, 41);
+}
+
+.page-link:hover {
+    color: rgb(64, 133, 88);	
+  }
