@@ -25,6 +25,10 @@ class BandTests(TestCase):
             added_by=cls.user
         )
 
+        cls.genre = Genre.objects.create(
+            name='genre'
+        )
+
         cls.band = Band.objects.create(
             name='Band',
             country_of_origin='USA',
@@ -37,6 +41,8 @@ class BandTests(TestCase):
             bio='bio',
             added_by=cls.user
         )
+        cls.band.genre.set(str(cls.genre.id))
+        cls.band.save()
 
     def test_bands_listing_alphabetically(self):
         response = self.client.get(reverse('band_list_alphabetically'))
