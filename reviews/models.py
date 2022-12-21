@@ -10,6 +10,6 @@ class Review(models.Model):
     band = models.ForeignKey(Band, on_delete=models.CASCADE)
     rating = models.DecimalField(max_digits=3, decimal_places=1)
     description = models.TextField()
-    user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
+    author = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
 
     added = models.DateTimeField(auto_now_add=True)
