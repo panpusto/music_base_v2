@@ -16,4 +16,5 @@ class GenreListView(ListView):
     model = Genre
     context_object_name = 'genre_list'
     template_name = 'genres/genre_list.html'
+    paginate_by = 10
     ordering = 'name'

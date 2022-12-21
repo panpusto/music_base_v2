@@ -20,6 +20,7 @@ class BandListViewAlphabetically(ListView):
     model = Band
     context_object_name = 'band_list'
     template_name = 'bands/band_list_alphabetically.html'
+    paginate_by = 10
     ordering = 'name'
 
 

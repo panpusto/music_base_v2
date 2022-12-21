@@ -20,6 +20,7 @@ class MusicianListView(ListView):
     model = Musician
     context_object_name = 'musician_list'
     template_name = 'musicians/musician_list.html'
+    paginate_by = 10
     ordering = 'name'
 
 

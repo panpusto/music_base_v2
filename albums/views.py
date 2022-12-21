@@ -16,6 +16,7 @@ class AlbumListViewAlphabetically(ListView):
     model = Album
     context_object_name = 'album_list'
     template_name = 'albums/album_list_alphabetically.html'
+    paginate_by = 10
     ordering = 'title'
 
 

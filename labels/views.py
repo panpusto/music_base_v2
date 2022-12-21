@@ -19,6 +19,7 @@ class LabelListView(ListView):
     model = Label
     context_object_name = 'label_list'
     template_name = 'labels/label_list.html'
+    paginate_by = 10
     ordering = 'name'
     
 
