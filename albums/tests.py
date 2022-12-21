@@ -4,6 +4,7 @@ from django.urls import reverse
 from labels.models import Label
 from bands.models import Band
 from albums.models import Album
+from genres.models import Genre
 
 
 class AlbumTests(TestCase):
@@ -14,6 +15,10 @@ class AlbumTests(TestCase):
             username='testuser1',
             password='testpass123',
             email='testuser1@email.com',
+        )
+
+        cls.genre = Genre.objects.create(
+            name='genre'
         )
 
         cls.label = Label.objects.create(
@@ -49,6 +54,8 @@ class AlbumTests(TestCase):
             cover='media/album_covers/age_of_excuse.jpg',
             added_by=cls.user
         )
+        cls.album.genre.set(str(cls.genre.id))
+        cls.album.save()
 
     def test_albums_listing_alphabetically(self):
         response = self.client.get(reverse('album_list_alphabetically'))
