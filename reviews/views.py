@@ -1,7 +1,8 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.views.generic import CreateView
+from django.views.generic import CreateView, ListView, DetailView
 from reviews.forms import ReviewCreationForm
 from django.urls import reverse_lazy
+from reviews.models import Review
 
 
 class ReviewCreateView(LoginRequiredMixin, CreateView):
@@ -13,3 +14,17 @@ class ReviewCreateView(LoginRequiredMixin, CreateView):
     def form_valid(self, form):
         form.instance.author = self.request.user
         return super().form_valid(form)
+
+
+class ReviewListView(ListView):
+    model = Review
+    context_object_name = 'review_list'
+    template_name = 'reviews/review_list.html'
+    paginate_by = 10
+    ordering = 'added'
+
+
+class ReviewDetailView(DetailView):
+    model = Review
+    context_object_name = 'review'
+    template_name = 'reviews/review_detail.html'
