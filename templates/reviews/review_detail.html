@@ -1,0 +1,21 @@
+{% extends '_base.html' %}
+
+{% block title %}Album details{% endblock title %}
+
+{% block content %}
+    <div class="title">
+        <h1>{{ review.subject }}</h1>
+        <h3>{{ review.album }}</h3>
+        <h3>Author: {{ review.author }}</h3>
+    </div>
+    <div class="details">
+        <img class="album-cover" src="{{ review.album.cover.url }}" alt="{{ review.album.title }}">
+    </div>
+    <div class="details">
+        <h3>{{ review.description }}</h3>
+        <h3>Rating: {{ review.rating }}</h3>
+    </div>
+    <div class="adding-info">
+        <p>Added: {{ review.added }}</p>
+    </div>
+{% endblock content %}
