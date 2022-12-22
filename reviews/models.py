@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 from albums.models import Album
 from bands.models import Band
 from django.contrib.auth import get_user_model
@@ -13,3 +14,6 @@ class Review(models.Model):
     author = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
 
     added = models.DateTimeField(auto_now_add=True)
+
+    def get_absolute_url(self):
+        return reverse("review_detail", args=[str(self.id)])
