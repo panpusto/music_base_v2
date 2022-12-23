@@ -73,3 +73,14 @@ class ReviewTests(TestCase):
         response = self.client.get(reverse('review_list'))
         self.assertEqual(response.status_code, 200)
         self.assertEqual(f'{self.review.subject}', 'Review title')
+
+    def test_add_review_view_for_logged_in_user(self):
+        self.client.login(
+            email='testuser1@email.com',
+            password='testpass123')
+        response = self.client.get(reverse('add_review'))
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, 'Add new review')
+        self.assertNotContains(response, 'Not contain me')
+        self.assertTemplateUsed(response, 'reviews/create_form.html')
+        
