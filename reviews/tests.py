@@ -83,4 +83,16 @@ class ReviewTests(TestCase):
         self.assertContains(response, 'Add new review')
         self.assertNotContains(response, 'Not contain me')
         self.assertTemplateUsed(response, 'reviews/create_form.html')
+
+    def test_add_review_for_logged_out_user(self):
+        self.client.logout()
+        response = self.client.get(reverse('add_review'))
+        self.assertEqual(response.status_code, 302)
+        self.assertRedirects(
+            response, f'{reverse("account_login")}?next=/reviews/add/'
+        )
+        response = self.client.get(
+            f'{reverse("account_login")}?next=/reviews/add/'
+        )
+        self.assertContains(response, 'Log In')
         
