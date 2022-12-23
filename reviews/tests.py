@@ -95,4 +95,11 @@ class ReviewTests(TestCase):
             f'{reverse("account_login")}?next=/reviews/add/'
         )
         self.assertContains(response, 'Log In')
-        
+
+    def test_review_detail_view(self):
+        response = self.client.get(self.review.get_absolute_url())
+        no_response = self.client.get('reviews/123456/')
+        self.assertEqual(response.status_code, 200)  
+        self.assertEqual(no_response.status_code, 404)
+        self.assertContains(response, 'Great album')
+        self.assertTemplateUsed(response, 'reviews/review_detail.html')
