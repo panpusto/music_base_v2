@@ -4,14 +4,14 @@
 
 {% block content %}
 
-    {% if search_musician_results or search_band_results %}
+    {% if search_musician_results or search_band_results or search_label_results %}
     <div class="list-group">
         {% for result in search_band_results %}
             <a 
                 href="{{ result.get_absolute_url }}" 
                 class="list-group-item list-group-item-action"
             >
-            {{ result.name }}
+            Band: {{ result.name }}
             </a>
         {% endfor %}
         {% for result in search_musician_results %}
@@ -19,7 +19,15 @@
                 href="{{ result.get_absolute_url }}" 
                 class="list-group-item list-group-item-action"
             >
-            {{ result.name }} - {{ result.full_name }}
+            Musician: {{ result.name }} - {{ result.full_name }}
+            </a>
+        {% endfor %}
+        {% for result in search_label_results %}
+            <a 
+                href="{{ result.get_absolute_url }}" 
+                class="list-group-item list-group-item-action"
+            >
+            Label: {{ result.name }}
             </a>
         {% endfor %}
         {% else %}

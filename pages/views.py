@@ -1,5 +1,7 @@
 from django.views.generic import TemplateView, ListView
-from bands.models import Band, Musician
+from bands.models import Band
+from musicians.models import Musician
+from labels.models import Label
 from django.db.models import Q
 
 
@@ -21,4 +23,5 @@ class SearchResultsListView(ListView):
         context['search_musician_results'] = Musician.objects.filter(
             Q(name__icontains=query) | Q(full_name__icontains=query)
         ).order_by('name', 'full_name')
+        context['search_label_results'] = Label.objects.filter(name__icontains=query).order_by('name')
         return context
