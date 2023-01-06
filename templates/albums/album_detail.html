@@ -22,4 +22,7 @@
         <p>Added by: {{ album.added_by }}</p>
         <p>Modified: {{ album.modified }}</p>
     </div>
+    <div>
+        <a class="btn btn-success" href="{% url 'album_update' album.id%}" type="submit">Update info</a>
+    </div>
 {% endblock content %}
