@@ -23,4 +23,7 @@
         <p>Added by: {{ band.added_by }}</p>
         <p>Modified: {{ band.modified }}</p>
     </div>
+    <div>
+        <a class="btn btn-success" href="{% url 'band_update' band.id%}" type="submit">Update info</a>
+    </div>
 {% endblock content %}

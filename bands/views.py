@@ -1,5 +1,10 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.views.generic import CreateView, ListView, DetailView
+from django.views.generic import (
+    CreateView,
+    ListView,
+    DetailView,
+    UpdateView
+)
 from bands.forms import BandCreationForm
 from django.urls import reverse_lazy
 from bands.models import Band
@@ -29,6 +34,23 @@ class BandDetailView(DetailView):
     context_object_name = 'band'
     template_name = 'bands/band_detail.html'
 
+
+class BandUpdateView(LoginRequiredMixin, UpdateView):
+    model = Band
+    fields = [
+            'name',
+            'country_of_origin',
+            'location',
+            'status',
+            'formed_in',
+            'ended_in',
+            'genre',
+            'lyrical_themes',
+            'current_label',
+            'bio',
+        ]
+    success_url = reverse_lazy('band_list_alphabetically')
+    template_name = 'bands/create_form.html'
     
 # TODO:
 # - consider list view with different ordering
