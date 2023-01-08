@@ -37,18 +37,7 @@ class BandDetailView(DetailView):
 
 class BandUpdateView(LoginRequiredMixin, UpdateView):
     model = Band
-    fields = [
-            'name',
-            'country_of_origin',
-            'location',
-            'status',
-            'formed_in',
-            'ended_in',
-            'genre',
-            'lyrical_themes',
-            'current_label',
-            'bio',
-        ]
+    form_class = BandCreationForm
     success_url = reverse_lazy('band_list_alphabetically')
     template_name = 'bands/create_form.html'
     
