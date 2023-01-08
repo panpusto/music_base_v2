@@ -36,14 +36,7 @@ class LabelDetailView(DetailView):
 
 class LabelUpdateView(LoginRequiredMixin, UpdateView):
     model = Label
-    fields = [
-            'name',
-            'address',
-            'country',
-            'status',
-            'styles',
-            'founding_year'
-        ]
+    form_class = LabelCreationForm
     success_url = reverse_lazy('label_list')
     template_name = 'labels/create_form.html'
     
