@@ -33,15 +33,6 @@ class AlbumDetailView(DetailView):
 
 class AlbumUpdateView(LoginRequiredMixin, UpdateView):
     model = Album
-    fields = [
-            'title',
-            'band',
-            'genre',
-            'album_type',
-            'release_date',
-            'catalog_id',
-            'label',
-            'album_format',
-            'cover']
+    form_class = AlbumCreationForm
     success_url = reverse_lazy('album_list_alphabetically')
     template_name = 'albums/create_form.html'
