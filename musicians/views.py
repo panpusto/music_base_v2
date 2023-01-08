@@ -1,5 +1,10 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.views.generic import CreateView, ListView, DetailView
+from django.views.generic import (
+    CreateView,
+    ListView,
+    DetailView,
+    UpdateView
+)
 from musicians.forms import MusicianCreationForm
 from django.urls import reverse_lazy
 from musicians.models import Musician
@@ -28,3 +33,11 @@ class MusicianDetailView(DetailView):
     model = Musician
     context_object_name = 'musician'
     template_name = 'musicians/musician_detail.html'
+
+
+class MusicianUpdateView(LoginRequiredMixin, UpdateView):
+    model = Musician
+    form_class = MusicianCreationForm
+    success_url = reverse_lazy('musician_list')
+    form_class = MusicianCreationForm
+    template_name = 'musicians/create_form.html'
