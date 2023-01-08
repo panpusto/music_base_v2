@@ -1,5 +1,10 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.views.generic import CreateView, ListView, DetailView
+from django.views.generic import (
+    CreateView,
+    ListView,
+    DetailView,
+    UpdateView
+)
 from labels.forms import LabelCreationForm
 from django.urls import reverse_lazy
 from labels.models import Label
@@ -27,3 +32,18 @@ class LabelDetailView(DetailView):
     model = Label
     context_object_name = 'label'
     template_name = 'labels/label_detail.html'
+
+
+class LabelUpdateView(LoginRequiredMixin, UpdateView):
+    model = Label
+    fields = [
+            'name',
+            'address',
+            'country',
+            'status',
+            'styles',
+            'founding_year'
+        ]
+    success_url = reverse_lazy('label_list')
+    template_name = 'labels/create_form.html'
+    
