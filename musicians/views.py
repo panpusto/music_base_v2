@@ -39,5 +39,4 @@ class MusicianUpdateView(LoginRequiredMixin, UpdateView):
     model = Musician
     form_class = MusicianCreationForm
     success_url = reverse_lazy('musician_list')
-    form_class = MusicianCreationForm
     template_name = 'musicians/create_form.html'
