@@ -18,4 +18,9 @@
     <div class="adding-info">
         <p>Added: {{ review.added }}</p>
     </div>
+    {% if request.user == review.author %}
+    <div>
+        <a class="btn btn-success" href="{% url 'review_update' review.id%}" type="submit">Update review</a>
+    </div>
+    {% endif %}
 {% endblock content %}

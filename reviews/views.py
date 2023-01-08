@@ -1,5 +1,10 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.views.generic import CreateView, ListView, DetailView
+from django.views.generic import (
+    CreateView,
+    ListView,
+    DetailView,
+    UpdateView
+)
 from reviews.forms import ReviewCreationForm
 from django.urls import reverse_lazy
 from reviews.models import Review
@@ -28,3 +33,10 @@ class ReviewDetailView(DetailView):
     model = Review
     context_object_name = 'review'
     template_name = 'reviews/review_detail.html'
+
+
+class ReviewUpdateView(UpdateView):
+    model = Review
+    form_class = ReviewCreationForm
+    success_url = reverse_lazy('review_list')
+    template_name = 'reviews/create_form.html'
