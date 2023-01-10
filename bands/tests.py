@@ -45,12 +45,15 @@ class BandTests(TestCase):
         cls.band.save()
 
     def test_bands_listing_alphabetically(self):
-        response = self.client.get(reverse('band_list_alphabetically'))
+        response = self.client.get(
+            reverse('band_list_alphabetically'))
         self.assertEqual(response.status_code, 200)
         self.assertEqual(f'{self.band.name}', 'Band')
 
     def test_add_band_view_for_logged_in_user(self):
-        self.client.login(email='testuser1@email.com', password='testpass123')
+        self.client.login(
+            email='testuser1@email.com',
+             password='testpass123')
         response = self.client.get(reverse('add_band'))
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, 'Add new band')
@@ -76,3 +79,45 @@ class BandTests(TestCase):
         self.assertEqual(no_response.status_code, 404)
         self.assertContains(response, 'Breslau')
         self.assertTemplateUsed(response, 'bands/band_detail.html')
+
+    def test_band_update_view_for_logged_in_user(self):
+        self.client.login(
+            email='testuser1@email.com', 
+            password='testpass123')
+        response = self.client.post(
+            reverse('band_update',
+            kwargs={'pk': self.band.id}),
+            {
+                'name': 'Kringa',
+                'country_of_origin': 'USA',
+                'location': 'Breslau',
+                'status': 1,
+                'genre': self.genre.id,
+                'formed_in': 2000,
+                'ended_in': 2000,
+                'lyrical_themes': 'themes',
+                'current_label': self.label.id,
+                'bio': 'bio',
+                'added_by': self.user.id
+            })
+        self.assertEqual(response.status_code, 302)
+        self.band.refresh_from_db()
+        response = self.client.get(self.band.get_absolute_url())
+        self.assertContains(response, 'Kringa')
+
+    def test_band_update_view_for_logged_out_user(self):
+        self.client.logout()
+        response = self.client.get(
+            reverse(
+                'band_update',
+                 kwargs={'pk': self.band.id}))
+        self.assertEqual(response.status_code, 302)
+        self.assertRedirects(
+            response,
+            f'{reverse("account_login")}?next=/bands/update/{self.band.id}/'
+        )
+        response = self.client.get(
+            f'{reverse("account_login")}?next=/bands/update/{self.band.id}/'
+        )
+        self.assertContains(response, 'Log In')
+        
