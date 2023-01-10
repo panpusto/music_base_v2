@@ -89,3 +89,38 @@ class AlbumTests(TestCase):
         self.assertEqual(no_response.status_code, 404)
         self.assertContains(response, 'NO001')
         self.assertTemplateUsed(response, 'albums/album_detail.html')
+
+    def test_album_update_view_for_logged_in_user(self):
+        self.client.login(email='testuser1@email.com', password='testpass123')
+        response = self.client.post(
+            reverse('album_update',
+            kwargs={'pk': self.album.id}),
+            {
+                'title': 'Axiom',
+                'band': self.band.id,
+                'album_type': 1,
+                'catalog_id': 'NO001',
+                'label': self.label.id,
+                'release_date': '2020-02-02',
+                'genre': self.genre.id,
+                'album_format': 1,
+                'cover': 'media/album_covers/age_of_excuse.jpg',
+                'added_by': self.user.id
+            })
+        # print(response.context['form'].errors) - checking errors in form
+        self.assertEqual(response.status_code, 302)
+        self.album.refresh_from_db()
+        response = self.client.get(self.album.get_absolute_url())
+        self.assertContains(response, 'Axiom')
+
+    def test_album_update_view_for_logged_out_user(self):
+        self.client.logout()
+        response = self.client.get(reverse('album_update', kwargs={'pk': self.album.id}))
+        self.assertEqual(response.status_code, 302)
+        self.assertRedirects(
+            response, f'{reverse("account_login")}?next=/albums/update/{self.album.id}/'
+        )
+        response = self.client.get(
+            f'{reverse("account_login")}?next=/albums/update/{self.album.id}/'
+        )
+        self.assertContains(response, 'Log In')
