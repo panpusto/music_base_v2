@@ -56,3 +56,46 @@ class MusicianTests(TestCase):
         self.assertEqual(no_response.status_code, 404)
         self.assertContains(response, 'info about musician')
         self.assertTemplateUsed(response, 'musicians/musician_detail.html')
+
+    def test_musician_update_view_for_logged_in_user(self):
+        self.client.login(
+            email='testuser1@email.com',
+            password='testpass123'
+        )
+        response = self.client.post(
+            reverse(
+                'musician_update',
+                kwargs={'pk': self.musician.id}),
+                {
+                    'name': 'Nihil',
+                    'full_name': 'John John',
+                    'born': '1978-03-18',
+                    'died': '1978-03-18',
+                    'place_of_birth': 'NY, USA',
+                    'bio': 'info about musician',
+                    'added_by': self.user.id
+                }
+        )
+        self.assertEqual(response.status_code, 302)
+        self.musician.refresh_from_db()
+        response = self.client.get(self.musician.get_absolute_url())
+        self.assertContains(response, 'Nihil')
+    
+    def test_musician_update_view_for_logged_out_user(self):
+        self.client.logout()
+        response = self.client.get(
+            reverse(
+                'musician_update',
+                kwargs={'pk': self.musician.id}
+            )
+        )
+        self.assertEqual(response.status_code, 302)
+        self.assertRedirects(
+            response,
+            f'{reverse("account_login")}?next=/musicians/update/{self.musician.id}/'
+        )
+        response = self.client.get(
+            f'{reverse("account_login")}?next=/musicians/update/{self.musician.id}/'
+        )
+        self.assertContains(response, 'Log In')
+        
