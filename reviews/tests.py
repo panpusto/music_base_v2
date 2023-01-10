@@ -103,3 +103,45 @@ class ReviewTests(TestCase):
         self.assertEqual(no_response.status_code, 404)
         self.assertContains(response, 'Great album')
         self.assertTemplateUsed(response, 'reviews/review_detail.html')
+
+    def test_update_view_for_logged_in_user(self):
+        self.client.login(
+            email='testuser1@email.com',
+            password='testpass123'
+        )
+        response = self.client.post(
+            reverse(
+                'review_update',
+                kwargs={'pk': self.review.id}),
+                {
+                    'subject': 'Masterpiece',
+                    'album': self.album.id,
+                    'band': self.band.id,
+                    'rating': 10.0,
+                    'description': 'Great album',
+                    'author': self.user.id
+                }
+        )
+        self.assertEqual(response.status_code, 302)
+        self.review.refresh_from_db()
+        response = self.client.get(self.review.get_absolute_url())
+        self.assertContains(response, 'Masterpiece')
+
+    def test_update_view_for_logged_out_user(self):
+        self.client.logout()
+        response = self.client.get(
+            reverse(
+                'review_update',
+                kwargs={'pk': self.review.id}
+            )
+        )
+        self.assertEqual(response.status_code, 302)
+        self.assertRedirects(
+            response,
+            f'{reverse("account_login")}?next=/reviews/update/{self.review.id}/'
+        )
+        response = self.client.get(
+            f'{reverse("account_login")}?next=/reviews/update/{self.review.id}/'
+        )
+        self.assertContains(response, 'Log In')
+        
