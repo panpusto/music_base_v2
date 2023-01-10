@@ -35,7 +35,7 @@ class ReviewDetailView(DetailView):
     template_name = 'reviews/review_detail.html'
 
 
-class ReviewUpdateView(UpdateView):
+class ReviewUpdateView(LoginRequiredMixin, UpdateView):
     model = Review
     form_class = ReviewCreationForm
     success_url = reverse_lazy('review_list')
