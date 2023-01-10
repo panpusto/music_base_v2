@@ -58,12 +58,15 @@ class AlbumTests(TestCase):
         cls.album.save()
 
     def test_albums_listing_alphabetically(self):
-        response = self.client.get(reverse('album_list_alphabetically'))
+        response = self.client.get(
+            reverse('album_list_alphabetically'))
         self.assertEqual(response.status_code, 200)
         self.assertEqual(f'{self.album.title}', 'Title')
     
     def test_add_album_view_for_logged_in_user(self):
-        self.client.login(email='testuser1@email.com', password='testpass123')
+        self.client.login(
+            email='testuser1@email.com', 
+            password='testpass123')
         response = self.client.get(reverse('add_album'))
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, 'Add new album')
@@ -75,7 +78,8 @@ class AlbumTests(TestCase):
         response = self.client.get(reverse('add_album'))
         self.assertEqual(response.status_code, 302)
         self.assertRedirects(
-            response, f'{reverse("account_login")}?next=/albums/add/'
+            response, 
+            f'{reverse("account_login")}?next=/albums/add/'
         )
         response = self.client.get(
             f'{reverse("account_login")}?next=/albums/add/'
@@ -91,7 +95,9 @@ class AlbumTests(TestCase):
         self.assertTemplateUsed(response, 'albums/album_detail.html')
 
     def test_album_update_view_for_logged_in_user(self):
-        self.client.login(email='testuser1@email.com', password='testpass123')
+        self.client.login(
+            email='testuser1@email.com',
+            password='testpass123')
         response = self.client.post(
             reverse('album_update',
             kwargs={'pk': self.album.id}),
@@ -115,10 +121,12 @@ class AlbumTests(TestCase):
 
     def test_album_update_view_for_logged_out_user(self):
         self.client.logout()
-        response = self.client.get(reverse('album_update', kwargs={'pk': self.album.id}))
+        response = self.client.get(
+            reverse('album_update', kwargs={'pk': self.album.id}))
         self.assertEqual(response.status_code, 302)
         self.assertRedirects(
-            response, f'{reverse("account_login")}?next=/albums/update/{self.album.id}/'
+            response,
+            f'{reverse("account_login")}?next=/albums/update/{self.album.id}/'
         )
         response = self.client.get(
             f'{reverse("account_login")}?next=/albums/update/{self.album.id}/'
