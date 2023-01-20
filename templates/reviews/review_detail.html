@@ -19,8 +19,13 @@
         <p>Added: {{ review.added }}</p>
     </div>
     {% if request.user == review.author %}
-    <div>
-        <a class="btn btn-success" href="{% url 'review_update' review.id%}" type="submit">Update review</a>
+    <div class="btn-group">
+        <div>
+            <a class="btn btn-warning" href="{% url 'review_update' review.id%}" type="submit">Update review</a>
+        </div>
+        <div>
+            <a class="btn btn-danger" href="{% url 'review_delete' review.id%}" type="submit">Delete review</a>
+        </div>
     </div>
     {% endif %}
 {% endblock content %}

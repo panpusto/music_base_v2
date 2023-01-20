@@ -3,7 +3,8 @@ from django.views.generic import (
     CreateView,
     ListView,
     DetailView,
-    UpdateView
+    UpdateView,
+    DeleteView
 )
 from reviews.forms import ReviewCreationForm
 from django.urls import reverse_lazy
@@ -40,3 +41,9 @@ class ReviewUpdateView(LoginRequiredMixin, UpdateView):
     form_class = ReviewCreationForm
     success_url = reverse_lazy('review_list')
     template_name = 'reviews/create_form.html'
+
+
+class ReviewDeleteView(LoginRequiredMixin, DeleteView):
+    model = Review
+    success_url = reverse_lazy('review_list')
+    template_name = 'reviews/confirm_delete.html'
