@@ -145,3 +145,31 @@ class ReviewTests(TestCase):
         )
         self.assertContains(response, 'Log In')
         
+    def test_delete_view_for_logged_in_user(self):
+        self.client.login(
+            email='testuser1@email.com',
+            password='testpass123'
+        )
+        response = self.client.get(
+            reverse(
+                'review_delete',
+                 kwargs={
+                    'pk': self.review.id
+                    }
+                )
+            )
+        self.assertContains(response, 'Are you sure you want to delete review?')
+        self.assertTemplateUsed(response, 'reviews/confirm_delete.html')
+        post_response = self.client.post(
+            reverse(
+                'review_delete',
+                kwargs={
+                    'pk': self.review.id
+                    }
+                )
+            )
+        self.assertRedirects(
+            post_response,
+             reverse('review_list'),
+              status_code=302)
+        
