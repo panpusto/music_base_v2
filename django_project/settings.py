@@ -183,6 +183,14 @@ DEFAULT_FROM_EMAIL = 'admin@alltimemusic.com'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
+# rest_framework config
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticated'
+    ]
+}
+
+# host config messages
 try:
     from django_project.local_settings import EMAIL_HOST_USER, EMAIL_HOST_PASSWORD
 except ModuleNotFoundError:
