@@ -26,6 +26,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     # user management
     path('accounts/', include('allauth.urls')),
+    # api
+    path('api/v1/', include('apis/urls')),
     # local apps
     path('', include('pages.urls')),
     path('genres/', include('genres.urls')),
