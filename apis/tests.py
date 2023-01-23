@@ -68,7 +68,10 @@ class APITests(APITestCase):
         cls.album.genre.set(str(cls.genre.id))
         cls.album.save()
 
-    def test_api_album_list_view(self):
+    def test_api_album_list_view_for_logged_in_user(self):
+        self.client.login(
+            email='testuser1@email.com',
+            password='testpass123')
         response = self.client.get(
             reverse('api_albums_list')
         )
@@ -76,7 +79,10 @@ class APITests(APITestCase):
         self.assertEqual(Album.objects.count(), 1)
         self.assertContains(response, self.album.title)
 
-    def test_api_album_detail_view(self):
+    def test_api_album_detail_view_for_logged_in_user(self):
+        self.client.login(
+            email='testuser1@email.com',
+            password='testpass123')
         response = self.client.get(
             reverse(
                 'api_album_detail',
@@ -87,7 +93,10 @@ class APITests(APITestCase):
         self.assertEqual(Album.objects.count(), 1)
         self.assertContains(response, 'NO001')
 
-    def test_api_band_list_view(self):
+    def test_api_band_list_view_for_logged_in_user(self):
+        self.client.login(
+            email='testuser1@email.com',
+            password='testpass123')
         response = self.client.get(
             reverse('api_bands_list')
         )
@@ -95,7 +104,10 @@ class APITests(APITestCase):
         self.assertEqual(Band.objects.count(), 1)
         self.assertContains(response, self.band.name)
 
-    def test_api_band_detail_view(self):
+    def test_api_band_detail_view_for_logged_in_user(self):
+        self.client.login(
+            email='testuser1@email.com',
+            password='testpass123')
         response = self.client.get(
             reverse(
                 'api_band_detail',
@@ -106,7 +118,10 @@ class APITests(APITestCase):
         self.assertEqual(Band.objects.count(), 1)
         self.assertContains(response, 'Breslau')
 
-    def test_api_label_list_view(self):
+    def test_api_label_list_view_for_logged_in_user(self):
+        self.client.login(
+            email='testuser1@email.com',
+            password='testpass123')
         response = self.client.get(
             reverse('api_labels_list')
         )
@@ -114,7 +129,10 @@ class APITests(APITestCase):
         self.assertEqual(Label.objects.count(), 1)
         self.assertContains(response, self.label)
 
-    def test_api_label_detail_view(self):
+    def test_api_label_detail_view_for_logged_in_user(self):
+        self.client.login(
+            email='testuser1@email.com',
+            password='testpass123')
         response = self.client.get(
             reverse(
                 'api_label_detail',
@@ -125,7 +143,10 @@ class APITests(APITestCase):
         self.assertEqual(Label.objects.count(), 1)
         self.assertContains(response, 'Warsaw')
 
-    def test_api_musician_list_view(self):
+    def test_api_musician_list_view_for_logged_in_user(self):
+        self.client.login(
+            email='testuser1@email.com',
+            password='testpass123')
         response = self.client.get(
             reverse('api_musicians_list')
         )
@@ -133,7 +154,10 @@ class APITests(APITestCase):
         self.assertEqual(Musician.objects.count(), 1)
         self.assertContains(response, self.musician.full_name)
 
-    def test_api_musician_detail_view(self):
+    def test_api_musician_detail_view_for_logged_in_user(self):
+        self.client.login(
+            email='testuser1@email.com',
+            password='testpass123')
         response = self.client.get(
             reverse(
                 'api_musician_detail',
