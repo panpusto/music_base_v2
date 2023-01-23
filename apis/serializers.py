@@ -2,11 +2,18 @@ from rest_framework import serializers
 from albums.models import (
     Album,
     ALBUM_TYPES,
-    FORMAT_TYPES,
+    FORMAT_TYPES
 )
 from bands.models import (
     Band,
     BAND_STATUS
+)
+from labels.models import (
+    Label,
+    LABEL_STATUS
+)
+from musicians.models import (
+    Musician
 )
 
 
@@ -68,4 +75,33 @@ class BandSerializer(serializers.ModelSerializer):
             'current_label',
             'bio',
             'members'
+        )
+
+
+class LabelSerializer(serializers.ModelSerializer):
+    status = ChoiceField(choices=LABEL_STATUS)
+    class Meta:
+        model = Label
+        fields = (
+            'id',
+            'name',
+            'address',
+            'country',
+            'status',
+            'styles',
+            'founding_year'
+        )
+
+
+class MusicianSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Musician
+        fields = (
+            'id',
+            'name',
+            'full_name',
+            'born',
+            'died',
+            'place_of_birth',
+            'bio'
         )

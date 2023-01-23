@@ -6,6 +6,7 @@ from genres.models import Genre
 from labels.models import Label
 from bands.models import Band
 from albums.models import Album
+from musicians.models import Musician
 
 class APITests(APITestCase):
     @classmethod
@@ -40,6 +41,16 @@ class APITests(APITestCase):
             lyrical_themes='themes',
             current_label=cls.label,
             bio='bio',
+            added_by=cls.user
+        )
+
+        cls.musician = Musician.objects.create(
+            name='Musician',
+            full_name='John John',
+            born='1978-03-18',
+            died='1978-03-18',
+            place_of_birth='NY, USA',
+            bio='info about musician',
             added_by=cls.user
         )
 
@@ -94,3 +105,41 @@ class APITests(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(Band.objects.count(), 1)
         self.assertContains(response, 'Breslau')
+
+    def test_api_label_list_view(self):
+        response = self.client.get(
+            reverse('api_labels_list')
+        )
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(Label.objects.count(), 1)
+        self.assertContains(response, self.label)
+
+    def test_api_label_detail_view(self):
+        response = self.client.get(
+            reverse(
+                'api_label_detail',
+                kwargs={'pk': self.band.id}),
+            format='json'
+        )
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(Label.objects.count(), 1)
+        self.assertContains(response, 'Warsaw')
+
+    def test_api_musician_list_view(self):
+        response = self.client.get(
+            reverse('api_musicians_list')
+        )
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(Musician.objects.count(), 1)
+        self.assertContains(response, self.musician.full_name)
+
+    def test_api_musician_detail_view(self):
+        response = self.client.get(
+            reverse(
+                'api_musician_detail',
+                kwargs={'pk': self.musician.id}),
+            format='json'
+        )
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(Musician.objects.count(), 1)
+        self.assertContains(response, 'info about musician')
