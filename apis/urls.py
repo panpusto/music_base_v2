@@ -38,4 +38,9 @@ urlpatterns = [
         'musicians/<int:pk>/',
         v.MusicianDetailAPIView.as_view(),
         name='api_musician_detail'),
+    # users
+    path(
+        'users/',
+        v.UserListAPIView.as_view(),
+        name='api_user_list'),
 ]

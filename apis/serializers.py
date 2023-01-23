@@ -1,4 +1,5 @@
 from rest_framework import serializers
+from django.contrib.auth import get_user_model
 from albums.models import (
     Album,
     ALBUM_TYPES,
@@ -104,4 +105,14 @@ class MusicianSerializer(serializers.ModelSerializer):
             'died',
             'place_of_birth',
             'bio'
+        )
+
+
+class UserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = get_user_model()
+        fields = (
+            'id',
+            'username',
+            'email',
         )
