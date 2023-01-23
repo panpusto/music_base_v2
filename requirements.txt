@@ -8,3 +8,4 @@ django-allauth==0.50.0
 django-debug-toolbar==3.7.0
 environs[django]==9.5.0
 pillow==9.0.1
+djangorestframework==3.14.0

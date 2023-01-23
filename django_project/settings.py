@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'allauth.socialaccount',
     'allauth.socialaccount.providers.github',
     'debug_toolbar',
+    'rest_framework',
     # local apps
     'accounts.apps.AccountsConfig',
     'pages.apps.PagesConfig',
