@@ -1,6 +1,10 @@
 from rest_framework import generics as g
 from albums.models import Album
-from .serializers import AlbumSerializer
+from bands.models import Band
+from .serializers import (
+    AlbumSerializer,
+    BandSerializer,
+)
 
 
 class AlbumListAPIView(g.ListAPIView):
@@ -11,3 +15,13 @@ class AlbumListAPIView(g.ListAPIView):
 class AlbumDetailAPIView(g.RetrieveAPIView):
     queryset = Album.objects.all()
     serializer_class = AlbumSerializer
+
+
+class BandListAPIView(g.ListAPIView):
+    queryset = Band.objects.all()
+    serializer_class = BandSerializer
+
+
+class BandDetailAPIView(g.RetrieveAPIView):
+    queryset = Band.objects.all()
+    serializer_class = BandSerializer

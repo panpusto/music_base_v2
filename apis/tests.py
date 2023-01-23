@@ -68,10 +68,29 @@ class APITests(APITestCase):
     def test_api_album_detail_view(self):
         response = self.client.get(
             reverse(
-                'api_albums_detail',
+                'api_album_detail',
                 kwargs={'pk': self.album.id}),
             format='json'
         )
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(Album.objects.count(), 1)
         self.assertContains(response, 'NO001')
+
+    def test_api_band_list_view(self):
+        response = self.client.get(
+            reverse('api_bands_list')
+        )
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(Band.objects.count(), 1)
+        self.assertContains(response, self.band.name)
+
+    def test_api_band_detail_view(self):
+        response = self.client.get(
+            reverse(
+                'api_band_detail',
+                kwargs={'pk': self.band.id}),
+            format='json'
+        )
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(Band.objects.count(), 1)
+        self.assertContains(response, 'Breslau')

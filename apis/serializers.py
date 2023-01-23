@@ -4,6 +4,10 @@ from albums.models import (
     ALBUM_TYPES,
     FORMAT_TYPES,
 )
+from bands.models import (
+    Band,
+    BAND_STATUS
+)
 
 
 class ChoiceField(serializers.ChoiceField):
@@ -41,4 +45,27 @@ class AlbumSerializer(serializers.ModelSerializer):
             'label',
             'album_format',
             'cover'
+        )
+
+
+class BandSerializer(serializers.ModelSerializer):
+    status = ChoiceField(choices=BAND_STATUS)
+    genre = serializers.StringRelatedField(many=True)
+    current_label = serializers.CharField(source='current_label.name')
+    members = serializers.StringRelatedField(many=True)
+    class Meta:
+        model = Band
+        fields = (
+            'id',
+            'name',
+            'country_of_origin',
+            'location',
+            'status',
+            'formed_in',
+            'ended_in',
+            'genre',
+            'lyrical_themes',
+            'current_label',
+            'bio',
+            'members'
         )
