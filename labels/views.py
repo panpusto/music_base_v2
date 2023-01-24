@@ -10,6 +10,7 @@ from django.urls import reverse_lazy
 from labels.models import Label
 
 class LabelCreateView(LoginRequiredMixin, CreateView):
+    """Creates an instance of the label."""
     form_class = LabelCreationForm
     success_url = reverse_lazy('home')
     template_name = 'labels/create_form.html'

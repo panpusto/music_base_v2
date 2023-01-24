@@ -23,7 +23,9 @@ class GenreTests(TestCase):
         self.assertEqual(f'{self.genre.name}', 'test genre')
 
     def test_add_genre_view_for_logged_in_user(self):
-        self.client.login(email='testuser@email.com', password='testpass123')
+        self.client.login(
+            email='testuser@email.com',
+            password='testpass123')
         response = self.client.get(reverse('add_genre'))
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, 'Add new genre')

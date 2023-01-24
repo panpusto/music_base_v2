@@ -3,4 +3,5 @@ from django.db import models
 
 
 class CustomUser(AbstractUser):
+    """Representation of the user."""
     pass

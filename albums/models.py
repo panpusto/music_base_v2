@@ -33,8 +33,12 @@ FORMAT_TYPES = [
 
 
 class Album(models.Model):
+    """Representation of the music album."""
     title = models.CharField(max_length=64)
-    band = models.ForeignKey(Band, on_delete=models.CASCADE, related_name='album_by')
+    band = models.ForeignKey(
+        Band,
+        on_delete=models.CASCADE,
+        related_name='album_by')
     genre = models.ManyToManyField(Genre)
     album_type = models.IntegerField(choices=ALBUM_TYPES)
     release_date = models.DateField(null=True)
@@ -44,12 +48,16 @@ class Album(models.Model):
     cover = models.ImageField(upload_to='album_covers/')
 
     added = models.DateTimeField(auto_now_add=True)
-    added_by = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
+    added_by = models.ForeignKey(
+        get_user_model(),
+        on_delete=models.CASCADE)
     modified = models.DateTimeField(auto_now=True)
 
     def __str__(self):
+        """Returns string representation of music album object."""
         return f'{self.title} by {self.band}'
 
     def get_absolute_url(self):
+        """Gets an absolute url of single music album."""
         return reverse("album_detail", args=[str(self.id)])
         

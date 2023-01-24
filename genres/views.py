@@ -6,6 +6,10 @@ from .models import Genre
 
 
 class GenreCreateView(LoginRequiredMixin, CreateView):
+    """
+    Creates a genre's instace.
+    Only for logged-in user.
+    """
     form_class = GenreCreationForm
     success_url = reverse_lazy('home')
     template_name = 'genres/create_form.html'
@@ -13,6 +17,7 @@ class GenreCreateView(LoginRequiredMixin, CreateView):
 
 
 class GenreListView(ListView):
+    """Displays genre's list."""
     model = Genre
     context_object_name = 'genre_list'
     template_name = 'genres/genre_list.html'

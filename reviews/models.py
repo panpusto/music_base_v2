@@ -6,6 +6,7 @@ from django.contrib.auth import get_user_model
 
 
 class Review(models.Model):
+    """Representation of the review."""
     subject = models.CharField(max_length=32)
     album = models.ForeignKey(Album, on_delete=models.CASCADE)
     band = models.ForeignKey(Band, on_delete=models.CASCADE)
@@ -16,4 +17,5 @@ class Review(models.Model):
     added = models.DateTimeField(auto_now_add=True)
 
     def get_absolute_url(self):
+        """Gets an absolute url of a single review."""
         return reverse("review_detail", args=[str(self.id)])

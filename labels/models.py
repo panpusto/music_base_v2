@@ -9,6 +9,7 @@ LABEL_STATUS = [
 ]
 
 class Label(models.Model):
+    """Representation of the music label."""
     name = models.CharField(max_length=48)
     address = models.CharField(max_length=128, blank=True)
     country = models.CharField(max_length=32)
@@ -17,11 +18,15 @@ class Label(models.Model):
     founding_year = models.IntegerField()
 
     added = models.DateTimeField(auto_now_add=True)
-    added_by = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
+    added_by = models.ForeignKey(
+        get_user_model(), 
+        on_delete=models.CASCADE)
     modified = models.DateTimeField(auto_now=True)
 
     def __str__(self):
+        """Returns string representation of a single label object."""
         return self.name
         
     def get_absolute_url(self):
+        """Gets an absolute url of single label."""
         return reverse("label_detail", args=[str(self.id)])

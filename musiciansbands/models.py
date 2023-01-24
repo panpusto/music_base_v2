@@ -4,6 +4,7 @@ from bands.models import Band
 
 
 class MusicianBand(models.Model):
+    """Representation of the band members."""
     musician = models.ForeignKey(Musician, on_delete=models.CASCADE)
     band = models.ForeignKey(Band, on_delete=models.CASCADE)
     year_from = models.IntegerField(null=True, blank=True)
@@ -11,4 +12,5 @@ class MusicianBand(models.Model):
     role = models.CharField(max_length=48)
 
     def __str__(self):
+        """String representation of the band members."""
         return f'{self.musician.name} - {self.musician.full_name}'
