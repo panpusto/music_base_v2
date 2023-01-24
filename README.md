@@ -13,11 +13,12 @@ Project is created with:
 - **Docker**
 
 ## Implemented functionalities:
-- register a new user
+- new user registration with email confirmation
 - log in/log out
-- possibility to change a password
 - reset password via email
-- creating, updating and deleting content are available for logged users
+- password change
+- content search in the database
+- creating, updating and deleting content are available for logged-in users
 - API for all models available for logged users with permissions
 - CORS configuration for front-end(possible SPA architecture in the future)
 - dynamic schema and documentation
