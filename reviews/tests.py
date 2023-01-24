@@ -18,6 +18,12 @@ class ReviewTests(TestCase):
             email='testuser1@email.com',
         )
 
+        cls.user2 = get_user_model().objects.create_user(
+            username='testuser2',
+            password='testpass123',
+            email='testuser2@email.com',
+        )
+
         cls.genre = Genre.objects.create(
             name='genre'
         )
@@ -104,7 +110,7 @@ class ReviewTests(TestCase):
         self.assertContains(response, 'Great album')
         self.assertTemplateUsed(response, 'reviews/review_detail.html')
 
-    def test_update_view_for_logged_in_user(self):
+    def test_update_view_for_author(self):
         self.client.login(
             email='testuser1@email.com',
             password='testpass123'
@@ -127,25 +133,20 @@ class ReviewTests(TestCase):
         response = self.client.get(self.review.get_absolute_url())
         self.assertContains(response, 'Masterpiece')
 
-    def test_update_view_for_logged_out_user(self):
-        self.client.logout()
+    def test_update_view_for_non_author(self):
+        self.client.login(
+            email='testuser2@email.com',
+            password='testpass123'
+        )
         response = self.client.get(
             reverse(
                 'review_update',
                 kwargs={'pk': self.review.id}
             )
         )
-        self.assertEqual(response.status_code, 302)
-        self.assertRedirects(
-            response,
-            f'{reverse("account_login")}?next=/reviews/update/{self.review.id}/'
-        )
-        response = self.client.get(
-            f'{reverse("account_login")}?next=/reviews/update/{self.review.id}/'
-        )
-        self.assertContains(response, 'Log In')
+        self.assertEqual(response.status_code, 403)
         
-    def test_delete_view_for_logged_in_user(self):
+    def test_delete_view_for_author(self):
         self.client.login(
             email='testuser1@email.com',
             password='testpass123'
@@ -173,3 +174,15 @@ class ReviewTests(TestCase):
              reverse('review_list'),
               status_code=302)
         
+    def test_delete_view_for_non_author(self):
+        self.client.login(
+            email='testuser2@email.com',
+            password='testpass123'
+        )
+        response = self.client.get(
+            reverse(
+                'review_delete',
+                kwargs={'pk': self.review.id}
+            )
+        )
+        self.assertEqual(response.status_code, 403)
