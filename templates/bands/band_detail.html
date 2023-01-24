@@ -14,9 +14,12 @@
         <h3>Ended in: {{ band.ended_in }}</h3>
         <h3>Genre: {% for genre in band.genre.all %} {{ genre }} {% endfor %}</h3>
         <h3>Lyrical themes: {{ band.lyrical_themes }}</h3>
-        <h3>Current label: {{ band.current_label }}</h3>
+        <h3>Current label: <a href="{{ band.current_label.get_absolute_url }}">{{ band.current_label }}</a></h3>
         <h3>Bio: {{ band.bio }}</h3>
-        <h3>Members: {% for member in band.members.all %} {{ member }} {% endfor %}</h3>
+        <h3>Members: 
+            {% for member in band.members.all %} 
+            <a href="{{ member.get_absolute_url }}">{{ member }}</a>
+            {% endfor %}</h3>
     </div>
     <div class="adding-info">
         <p>Added: {{ band.added }}</p>

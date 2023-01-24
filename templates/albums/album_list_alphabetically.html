@@ -10,7 +10,7 @@
                 href="{{ album.get_absolute_url }}" 
                 class="list-group-item list-group-item-action"
             >
-            {{ album.title }} by {{ album.band }}
+            {{ album.title }} by {{ album.band.name }}
             </a>
         {% endfor %}
     </div>

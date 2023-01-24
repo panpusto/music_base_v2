@@ -4,7 +4,7 @@
 
 {% block content %}
     <div class="title">
-        <h1>{{ album.title }} by {{ album.band }}</h1>
+        <h1>{{ album.title }} by <a href="{{ album.band.get_absolute_url }}">{{ album.band.name }}</a></h1>
     </div>
     <div class="details">
         <img class="album-cover" src="{{ album.cover.url }}" alt="{{ album.title }}">
@@ -14,7 +14,7 @@
         <h3>Type: {{ album.get_album_type_display }}</h3>
         <h3>Release date: {{ album.release_date }}</h3>
         <h3>Catalog ID: {{ album.catalog_id }}</h3>
-        <h3>Label: {{ album.label }}</h3>
+        <h3>Label: <a href="{{ album.label.get_absolute_url }}">{{ album.label }}</a></h3>
         <h3>Format: {{ album.get_album_format_display }}</h3>
     </div>
     <div class="adding-info">
