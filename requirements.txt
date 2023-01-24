@@ -10,3 +10,4 @@ environs[django]==9.5.0
 pillow==9.0.1
 djangorestframework==3.14.0
 django-cors-headers==3.13.0
+drf-spectacular==0.25.1
