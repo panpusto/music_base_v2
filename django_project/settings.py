@@ -52,6 +52,7 @@ INSTALLED_APPS = [
     'debug_toolbar',
     'rest_framework',
     'corsheaders',
+    'drf_spectacular',
     # local apps
     'accounts.apps.AccountsConfig',
     'pages.apps.PagesConfig',
@@ -191,7 +192,14 @@ MEDIA_ROOT = BASE_DIR / 'media'
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.IsAuthenticated'
-    ]
+    ],
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
+}
+
+SPECTACULAR_SETTINGS = {
+    "TITLE": "AllTimeMusic",
+    "DESCRIPTION": "music database with REST API",
+    "VERSION": "1.0.0",
 }
 
 # CORS config
