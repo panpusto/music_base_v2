@@ -32,7 +32,6 @@
               </a>
               <ul class="dropdown-menu">
                 <li><a class="dropdown-item" href="#">Profile</a></li>
-                <li><a class="dropdown-item" href="#">By genre</a></li>
                 {% if user.is_superuser %}
                 <li><hr class="dropdown-divider"></li>
                 <li><a class="dropdown-item" href="{% url 'admin:index' %}">Site administration</a></li>
