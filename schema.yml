@@ -1,0 +1,410 @@
+openapi: 3.0.3
+info:
+  title: AllTimeMusic
+  version: 1.0.0
+  description: music database with REST API
+paths:
+  /api/v1/albums/:
+    get:
+      operationId: albums_list
+      description: Displays list of albums in json format.
+      tags:
+      - albums
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Album'
+          description: ''
+  /api/v1/albums/{id}/:
+    get:
+      operationId: albums_retrieve
+      description: Displays a single album details in json format.
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        required: true
+      tags:
+      - albums
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Album'
+          description: ''
+  /api/v1/bands/:
+    get:
+      operationId: bands_list
+      description: Displays list of bands in json format.
+      tags:
+      - bands
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Band'
+          description: ''
+  /api/v1/bands/{id}/:
+    get:
+      operationId: bands_retrieve
+      description: Displays a single band details in json format.
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        required: true
+      tags:
+      - bands
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Band'
+          description: ''
+  /api/v1/labels/:
+    get:
+      operationId: labels_list
+      description: Displays list of labels in json format.
+      tags:
+      - labels
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Label'
+          description: ''
+  /api/v1/labels/{id}/:
+    get:
+      operationId: labels_retrieve
+      description: Displays a single label details in json format.
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        required: true
+      tags:
+      - labels
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Label'
+          description: ''
+  /api/v1/musicians/:
+    get:
+      operationId: musicians_list
+      description: Displays list of musicians in json format.
+      tags:
+      - musicians
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Musician'
+          description: ''
+  /api/v1/musicians/{id}/:
+    get:
+      operationId: musicians_retrieve
+      description: Displays a single musician details in json format.
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        required: true
+      tags:
+      - musicians
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Musician'
+          description: ''
+  /api/v1/users/:
+    get:
+      operationId: users_list
+      description: |-
+        Displays list of users in json format.
+        Only for admins.
+      tags:
+      - users
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/User'
+          description: ''
+components:
+  schemas:
+    Album:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        title:
+          type: string
+          maxLength: 64
+        band:
+          type: string
+        genre:
+          type: array
+          items:
+            type: string
+        album_type:
+          $ref: '#/components/schemas/AlbumTypeEnum'
+        release_date:
+          type: string
+          format: date
+          nullable: true
+        catalog_id:
+          type: string
+          maxLength: 16
+        label:
+          type: string
+        album_format:
+          $ref: '#/components/schemas/AlbumFormatEnum'
+        cover:
+          type: string
+          format: uri
+      required:
+      - album_format
+      - album_type
+      - band
+      - catalog_id
+      - cover
+      - genre
+      - id
+      - label
+      - title
+    AlbumFormatEnum:
+      enum:
+      - 1
+      - 2
+      - 3
+      - 4
+      - 5
+      - 6
+      - 7
+      type: integer
+    AlbumTypeEnum:
+      enum:
+      - 1
+      - 2
+      - 3
+      - 4
+      - 5
+      - 6
+      - 7
+      - 8
+      - 9
+      - 10
+      - 11
+      type: integer
+    Band:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          maxLength: 64
+        country_of_origin:
+          type: string
+          maxLength: 32
+        location:
+          type: string
+          maxLength: 48
+        status:
+          $ref: '#/components/schemas/BandStatusEnum'
+        formed_in:
+          type: integer
+          maximum: 2147483647
+          minimum: -2147483648
+        ended_in:
+          type: integer
+          maximum: 2147483647
+          minimum: -2147483648
+          nullable: true
+        genre:
+          type: array
+          items:
+            type: string
+        lyrical_themes:
+          type: string
+          maxLength: 64
+        current_label:
+          type: string
+        bio:
+          type: string
+          nullable: true
+        members:
+          type: array
+          items:
+            type: string
+      required:
+      - country_of_origin
+      - current_label
+      - formed_in
+      - genre
+      - id
+      - location
+      - lyrical_themes
+      - members
+      - name
+      - status
+    BandStatusEnum:
+      enum:
+      - 1
+      - 2
+      - 3
+      - 4
+      - 5
+      - 6
+      type: integer
+    Label:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          maxLength: 48
+        address:
+          type: string
+          maxLength: 128
+        country:
+          type: string
+          maxLength: 32
+        status:
+          $ref: '#/components/schemas/LabelStatusEnum'
+        styles:
+          type: string
+          maxLength: 128
+        founding_year:
+          type: integer
+          maximum: 2147483647
+          minimum: -2147483648
+      required:
+      - country
+      - founding_year
+      - id
+      - name
+      - status
+      - styles
+    LabelStatusEnum:
+      enum:
+      - 1
+      - 2
+      - 3
+      type: integer
+    Musician:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          maxLength: 32
+        full_name:
+          type: string
+          maxLength: 64
+        born:
+          type: string
+          format: date
+          nullable: true
+        died:
+          type: string
+          format: date
+          nullable: true
+        place_of_birth:
+          type: string
+          maxLength: 32
+        bio:
+          type: string
+      required:
+      - full_name
+      - id
+      - name
+      - place_of_birth
+    User:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        username:
+          type: string
+          description: Required. 150 characters or fewer. Letters, digits and @/./+/-/_
+            only.
+          pattern: ^[\w.@+-]+$
+          maxLength: 150
+        email:
+          type: string
+          format: email
+          title: Email address
+          maxLength: 254
+      required:
+      - id
+      - username
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+    cookieAuth:
+      type: apiKey
+      in: cookie
+      name: sessionid
